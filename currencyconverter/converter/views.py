@@ -9,8 +9,8 @@ import logging
 from .currency_utils import get_exchange_rate, fetch_exchange_rate_data
 from .serializers import CurrencyConversionSerializer
 
-# Step 2: Create a logger instance
 logger = logging.getLogger(__name__)
+
 
 class ConvertCurrency(APIView):
     """

@@ -1,12 +1,10 @@
 from concurrent.futures import ThreadPoolExecutor
 from django.core.cache import cache
-import requests
 import logging
 
 from currencyconverter.settings import CACHE_TIMEOUT, API_URL
 from .serializers import fetch_data
 
-# Step 2: Create a logger instance
 logger = logging.getLogger(__name__)
 
 
@@ -27,10 +25,8 @@ def fetch_exchange_rate_data() -> dict:
                 data = future.result()
                 cache.set('exchange_rate_data', data, timeout=CACHE_TIMEOUT)
 
-            # Log the successful fetch operation
             logger.info("Successfully fetched exchange rate data")
         except Exception as e:
-            # Log any exception that occurs during the fetch operation
             logger.error(f"Error fetching exchange rate data: {e}")
             raise
 
@@ -57,11 +53,9 @@ def get_exchange_rate(from_currency: str, to_currency: str) -> float:
 
         rate = (from_rate['Value'] / from_rate['Nominal']) / (to_rate['Value'] / to_rate['Nominal'])
 
-        # Log the successful calculation of the exchange rate
         logger.info(f"Successfully calculated exchange rate from {from_currency} to {to_currency}: {rate}")
 
     except Exception as e:
-        # Log any exception that occurs during the calculation of the exchange rate
         logger.error(f"Error calculating exchange rate from {from_currency} to {to_currency}: {e}")
         raise
 

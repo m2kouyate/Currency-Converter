@@ -150,4 +150,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 API_URL = "https://www.cbr-xml-daily.ru/daily_json.js"
-CACHE_TIMEOUT = 3600  # 1 hour
+CACHE_TIMEOUT = 3600

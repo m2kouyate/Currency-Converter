@@ -6,7 +6,6 @@ from django.core.cache import cache
 from currencyconverter.settings import API_URL, CACHE_TIMEOUT
 import logging
 
-# Step 2: Create a logger instance
 logger = logging.getLogger(__name__)
 
 
@@ -36,10 +35,8 @@ def get_available_currencies() -> List[Tuple[str, str]]:
                 available_currencies = sorted(available_currencies, key=lambda x: x[1])
                 cache.set('available_currencies', available_currencies, timeout=CACHE_TIMEOUT)
 
-                # Log the successful fetch operation
                 logger.info("Successfully fetched available currencies")
         except Exception as e:
-            # Log any exception that occurs during the fetch operation
             logger.error(f"Error fetching available currencies: {e}")
             raise
 
